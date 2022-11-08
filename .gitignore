@@ -1,0 +1,11 @@
+# VSC configuration files
+.vscode
+
+# Compiled object files
+*.o
+
+# Executable
+*.out
+
+# Test folder
+test
