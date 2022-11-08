@@ -17,10 +17,9 @@
  * @copyright Copyright (c) 2022
  *
  */
-#include <vector>
 #include <iostream>
 
-#include "../include/functions.h"
+#include "functions.h"
 
 #ifndef _MATRIX_H_
 #define _MATRIX_H_
