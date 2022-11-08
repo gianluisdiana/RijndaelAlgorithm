@@ -20,9 +20,18 @@
 #include <iostream>
 
 #include "../include/functions.h"
+#include "../include/rijndael.h"
 
 int main(int argc, char* argv[]) {
   checkInput(argc);
+
+  Rijndael rijndael(argv[1]);
+  rijndael.encrypt();
+
+  std::cout << "Text encrypted: " << rijndael.text() << "\n";
+
+  rijndael.decrypt();
+  std::cout << "Text decrypted: " << rijndael.text() << "\n";
 
   return 0;
 }
