@@ -9,6 +9,7 @@
 #
 # 'make'        build executable file 'main'
 # 'make clean'  removes all .o and executable files
+# 'make setup'  creates the necesary folders
 #
 
 # Define the Cpp compiler to use
@@ -35,3 +36,7 @@ exec.out: $(OBJ)
 clean:
 	clear
 	rm ./build/*.o ./bin/exec.out
+
+# Create the necesary folders to build the code
+setup:
+	mkdir bin build
