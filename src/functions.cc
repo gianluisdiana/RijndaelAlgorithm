@@ -32,3 +32,20 @@ void checkInput(int argc) {
   usage();
   exit(1);
 }
+
+std::string formatText(std::string text, const size_t size, const char padding_char) {
+  while (text.size() < size) text += padding_char;
+  return text;
+}
+
+std::string reverseString(const std::string str) {
+  std::string reversed_string = "";
+  for (int i = str.length() - 1; i >= 0; --i)
+    reversed_string += str[i];
+  return reversed_string;
+}
+
+int getIndex(std::vector<char> vector, int element) {
+  auto it = std::find(vector.begin(), vector.end(), element);
+  return it != vector.end() ? it - vector.begin() : -1;
+}

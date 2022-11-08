@@ -35,4 +35,34 @@ void usage();
  */
 void checkInput(int argc);
 
+/**
+ * @brief Complete the string with a padding character
+ *
+ * @param text The text to format
+ * @param size The size that the text will have after the padding
+ * @param padding_char The character to add to the string
+ */
+std::string formatText(std::string text, const size_t size, const char padding_char = ' ');
+
+
+/**
+ * @brief Loop the string from the end to the beginnig, setting the reversed string
+ *
+ * @param str The string to reverse
+ * @return The reversed string
+ */
+std::string reverseString(const std::string str);
+
+/**
+ * @brief Get the the index of an element.
+ *
+ * @tparam The data type of the vector
+ *
+ * @param vector The vector to see its content.
+ * @param element The element to search.
+ *
+ * @return The position of the element. -1 if it wasn't in the vector.
+ */
+int getIndex(std::vector<char> vector, int element);
+
 #endif // _FUNTIONS_H_
