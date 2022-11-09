@@ -61,8 +61,8 @@ void Rijndael::addRoundKey() {
 void Rijndael::subBytes() {
   for (size_t i = 0; i < 4; ++i) {
     for (size_t j = 0; j < 4; ++j) {
-      int row = getIndex(Hex::equivalent, this->_text_matrix[i][j][0]);
-      int col = getIndex(Hex::equivalent, this->_text_matrix[i][j][1]);
+      int row = getIndex<char>(Hex::equivalent, this->_text_matrix[i][j][0]);
+      int col = getIndex<char>(Hex::equivalent, this->_text_matrix[i][j][1]);
       this->_text_matrix[i][j] = Rijndael::substitution_box[row][col];
     }
   }
