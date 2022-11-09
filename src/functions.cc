@@ -20,7 +20,6 @@
 #include "../include/functions.h"
 
 #include <iostream>
-#include <algorithm>
 
 void usage() {
   std::cout << "Introduce the key when executing the code:\n"
@@ -43,9 +42,4 @@ std::string reverseString(const std::string str) {
   for (int i = str.length() - 1; i >= 0; --i)
     reversed_string += str[i];
   return reversed_string;
-}
-
-int getIndex(std::vector<char> vector, int element) {
-  auto it = std::find(vector.begin(), vector.end(), element);
-  return it != vector.end() ? it - vector.begin() : -1;
 }

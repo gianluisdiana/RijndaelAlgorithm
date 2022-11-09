@@ -44,7 +44,7 @@ int Hex::hexToDecimal(std::string hex_value) {
   int current_index = hex_value.length() - 1;
 
   for (size_t i = 0; i < hex_value.length(); ++i) {
-    result += getIndex(Hex::equivalent, hex_value[i]) * pow(16, current_index);
+    result += getIndex<char>(Hex::equivalent, hex_value[i]) * pow(16, current_index);
     --current_index;
   }
 

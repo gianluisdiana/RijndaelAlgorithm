@@ -17,6 +17,7 @@
  * @copyright Copyright (c) 2022
  *
  */
+#include <algorithm>
 #include <string>
 #include <vector>
 
@@ -56,13 +57,17 @@ std::string reverseString(const std::string str);
 /**
  * @brief Get the the index of an element.
  *
- * @tparam The data type of the vector
+ * @tparam T The data type of the vector
  *
  * @param vector The vector to see its content.
  * @param element The element to search.
  *
  * @return The position of the element. -1 if it wasn't in the vector.
  */
-int getIndex(std::vector<char> vector, int element);
+template <class T>
+int getIndex(std::vector<T> vector, T element) {
+  auto it = std::find(vector.begin(), vector.end(), element);
+  return it != vector.end() ? it - vector.begin() : -1;
+}
 
 #endif // _FUNTIONS_H_
