@@ -4,7 +4,7 @@
  *
  * @file hex.h
  * @version 0.2
- * @brief Teasure Hunt
+ * @brief Treasure Hunt
  *    This program was made to uncode a password that has to be discovered by
  * putting together multiples hints that were hide around our college building
  * as an activity for the CESINF (Congreso de Estudiantes de Ingenieria

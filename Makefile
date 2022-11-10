@@ -3,7 +3,7 @@
 # Date: November 7, 2022
 # e-mail: gianluisbolivar1@gmail.com
 #
-# Makefile for the CESINF VIII Teasure Hunt.
+# Makefile for the CESINF VIII Treasure Hunt.
 #
 
 #
