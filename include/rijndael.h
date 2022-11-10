@@ -73,7 +73,7 @@ private:
    */
   void invAddRoundKey();
 
-  static const Hex substitution_box[16][16];
+  static Matrix<Hex> substitution_box;
   static std::string _encryption_key; // Key used to encrypt the text
   Matrix<Hex> _text_matrix; // A matrix with the text to encrypt
   Matrix<Hex> _encryption_matrix;

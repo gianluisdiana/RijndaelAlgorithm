@@ -21,7 +21,7 @@
 
 #include "../include/functions.h"
 
-const Hex Rijndael::substitution_box[16][16] = {
+Hex box[16][16] = {
   {Hex("63"), Hex("7C"), Hex("77"),	Hex("7B"), Hex("F2"), Hex("6B"), Hex("6F"), Hex("C5"), Hex("30"), Hex("01"), Hex("67"), Hex("2B"), Hex("FE"),	Hex("D7"), Hex("AB"),	Hex("76")},
   {Hex("CA"), Hex("82"), Hex("C9"),	Hex("7D"), Hex("FA"), Hex("59"), Hex("47"), Hex("F0"), Hex("AD"), Hex("D4"), Hex("A2"), Hex("AF"), Hex("9C"),	Hex("A4"), Hex("72"),	Hex("C0")},
   {Hex("B7"), Hex("FD"), Hex("93"),	Hex("26"), Hex("36"), Hex("3F"), Hex("F7"), Hex("CC"), Hex("34"), Hex("A5"), Hex("E5"), Hex("F1"), Hex("71"),	Hex("D8"), Hex("31"),	Hex("15")},
@@ -39,6 +39,8 @@ const Hex Rijndael::substitution_box[16][16] = {
   {Hex("E1"), Hex("F8"), Hex("98"),	Hex("11"), Hex("69"), Hex("D9"), Hex("8E"), Hex("94"), Hex("9B"), Hex("1E"), Hex("87"), Hex("E9"), Hex("CE"),	Hex("55"), Hex("28"),	Hex("DF")},
   {Hex("8C"), Hex("A1"), Hex("89"),	Hex("0D"), Hex("BF"), Hex("E6"), Hex("42"), Hex("68"), Hex("41"), Hex("99"), Hex("2D"), Hex("0F"), Hex("B0"),	Hex("54"), Hex("BB"),	Hex("16")}
 };
+
+Matrix<Hex> Rijndael::substitution_box = Matrix<Hex>(box);
 
 std::string Rijndael::_encryption_key = "ULL_C0ngR350-1nF";
 
@@ -70,7 +72,7 @@ void Rijndael::subBytes() {
 
 void Rijndael::encrypt() {
   this->addRoundKey();
-  // this->subBytes();
+  this->subBytes();
 }
 
 // ------------------ DECRYPT ------------------
