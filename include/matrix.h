@@ -51,6 +51,16 @@ public:
   Matrix(std::string str, const size_t amount_rows, const size_t amount_cols);
 
 /**
+ * @brief Initialize the matrix with an bidimensional array of the type.
+ *
+ * @tparam amount_rows The amount of rows the 2D array has.
+ * @tparam amount_cols The amount of cols the 2D array has.
+ * @param matrix The bidemensional array to get the data from.
+ */
+  template <size_t amount_rows, size_t amount_cols>
+  Matrix(T (&matrix)[amount_rows][amount_cols]);
+
+/**
  * @brief Overload of the << operator to print the matrix.
  *
  * @param os Represents the outflow.
@@ -93,6 +103,13 @@ public:
  */
   std::string toString();
 
+/**
+ * @brief Get the amount of rows.
+ *
+ * @return The amount of rows the matrix has.
+ */
+  size_t amountRows();
+
 private:
   size_t _amount_rows; // The amount of rows the matrix has
   size_t _amount_cols; // The amount of columns the matrix has
@@ -118,6 +135,24 @@ Matrix<T>::Matrix (std::string str, const size_t amount_rows, const size_t amoun
     if (i % amount_cols == 0) this->_matrix.push_back(std::vector<T>());
     this->_matrix[int(i / amount_rows)].push_back(T(str[i]));
   }
+}
+
+template <class T>
+template <size_t amount_rows, size_t amount_cols>
+Matrix<T>::Matrix (T (&matrix)[amount_rows][amount_cols]) {
+  this->_amount_rows = amount_rows;
+  this->_amount_cols = amount_cols;
+
+  for (size_t i = 0; i < this->_amount_rows; ++i) {
+    this->_matrix.push_back(std::vector<T>());
+    this->_matrix[i].assign(matrix[i], matrix[i] + this->_amount_cols);
+  }
+  std::cout << *this << std::endl;
+}
+
+template <class T>
+size_t Matrix<T>::amountRows() {
+  return this->_amount_rows;
 }
 
 template <class C>
