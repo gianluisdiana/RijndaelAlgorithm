@@ -74,4 +74,24 @@ int getIndex(std::vector<T> vector, T element) {
   return it != vector.end() ? it - vector.begin() : -1;
 }
 
+/**
+ * @brief Shift a vector "offset" times
+ *
+ * @tparam T The data type of the vector
+ * @param vector Array to shift
+ * @param offset The amount of times the vector will be shift
+ * @return A vector shifted
+ */
+template <class T>
+std::vector<T> shiftVector(const std::vector<T> &vector, const int offset) {
+  std::vector<T> shifted_vector;
+  // Startinng in the offset position
+  for (size_t i = offset; i < vector.size(); ++i) shifted_vector.push_back(vector[i]);
+  // Adding the rest
+  for (int i = 0; i < offset; ++i) shifted_vector.push_back(vector[i]);
+
+  return shifted_vector;
+}
+
+
 #endif // _FUNTIONS_H_
