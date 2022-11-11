@@ -21,6 +21,9 @@
 #include <string>
 #include <vector>
 
+template <class T>
+class Matrix;
+
 #ifndef _FUNTIONS_H_
 #define _FUNTIONS_H_
 

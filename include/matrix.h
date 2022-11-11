@@ -147,7 +147,6 @@ Matrix<T>::Matrix (T (&matrix)[amount_rows][amount_cols]) {
     this->_matrix.push_back(std::vector<T>());
     this->_matrix[i].assign(matrix[i], matrix[i] + this->_amount_cols);
   }
-  std::cout << *this << std::endl;
 }
 
 template <class T>

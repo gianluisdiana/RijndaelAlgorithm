@@ -18,7 +18,6 @@
  *
  */
 #include "matrix.h"
-#include "hex.h"
 
 #ifndef _RIJNDAEL_H_
 #define _RIJNDAEL_H_
@@ -78,11 +77,11 @@ private:
    */
   void invSubBytes();
 
-  static const Hex s_box[16][16];
-  static const Hex inverse_s_box[16][16];
+  static const uint32_t s_box[16][16];
+  static const uint32_t inverse_s_box[16][16];
   static std::string _encryption_key; // Key used to encrypt the text
-  Matrix<Hex> _text_matrix; // A matrix with the text to encrypt
-  Matrix<Hex> _encryption_matrix;
+  Matrix<uint32_t> _text_matrix; // A matrix with the text to encrypt
+  Matrix<uint32_t> _encryption_matrix;
 };
 
 #endif // _RIJNDAEL_H_
