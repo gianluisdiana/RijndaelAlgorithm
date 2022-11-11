@@ -77,11 +77,11 @@ private:
    */
   void invSubBytes();
 
-  static const uint32_t s_box[16][16];
-  static const uint32_t inverse_s_box[16][16];
-  static std::string _encryption_key; // Key used to encrypt the text
-  Matrix<uint32_t> _text_matrix; // A matrix with the text to encrypt
-  Matrix<uint32_t> _encryption_matrix;
+  static const uint32_t s_box[16][16];          // Box to substitute values with
+  static const uint32_t inverse_s_box[16][16];  // Box to reverse the substitute done
+  static std::string _encryption_key;           // Key used to encrypt the text
+  Matrix<uint32_t> _text_matrix;                // A matrix with the text to encrypt
+  Matrix<uint32_t> _encryption_matrix;          // A matrix with the private key encrypted
 };
 
 #endif // _RIJNDAEL_H_
