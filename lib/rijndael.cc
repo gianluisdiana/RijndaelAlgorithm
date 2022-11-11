@@ -3,7 +3,7 @@
  * @date November 7, 2022
  *
  * @file rijndael.cc
- * @version 0.3
+ * @version 0.4
  * @brief Treasure Hunt
  *    This program was made to uncode a password that has to be discovered by
  * putting together multiples hints that were hide around our college building
@@ -91,10 +91,20 @@ void Rijndael::shiftRows() {
     this->_text_matrix[offset] = shiftVector<uint32_t>(this->_text_matrix[offset], offset);
 }
 
-void Rijndael::encrypt() {
-  this->addRoundKey();
+void Rijndael::round(const int current_round) {
   this->subBytes();
   this->shiftRows();
+  // this->mixColumns();
+  this->addRoundKey();
+  if (current_round != 9) this->round(current_round + 1);
+}
+
+void Rijndael::encrypt() {
+  this->addRoundKey();
+  this->round();
+  this->subBytes();
+  this->shiftRows();
+  this->addRoundKey();
 }
 
 // ------------------ DECRYPT ------------------
@@ -109,14 +119,22 @@ void Rijndael::invSubBytes() {
 }
 
 void Rijndael::invShiftRows() {
-  std::cout << this->_text_matrix;
   for (int offset = 0; offset < 4; ++offset)
     this->_text_matrix[offset] = unshiftVector<uint32_t>(this->_text_matrix[offset], offset);
-  std::cout << this->_text_matrix;
+}
+
+void Rijndael::invRound(const int current_round) {
+  this->addRoundKey();
+  this->invShiftRows();
+  this->invSubBytes();
+  // this->invMixColumns();
+  if (current_round != 1) this->invRound(current_round - 1);
 }
 
 void Rijndael::decrypt() {
+  addRoundKey();
   invShiftRows();
   invSubBytes();
+  this->invRound();
   addRoundKey();
 }
