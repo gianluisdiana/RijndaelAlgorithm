@@ -73,7 +73,13 @@ private:
    */
   void invAddRoundKey();
 
-  static Matrix<Hex> substitution_box;
+  /**
+   * @brief Revert the sustitution made with the box.
+   */
+  void invSubBytes();
+
+  static const Hex s_box[16][16];
+  static const Hex inverse_s_box[16][16];
   static std::string _encryption_key; // Key used to encrypt the text
   Matrix<Hex> _text_matrix; // A matrix with the text to encrypt
   Matrix<Hex> _encryption_matrix;
