@@ -3,7 +3,7 @@
  * @date November 7, 2022
  *
  * @file rijndael.cc
- * @version 0.2
+ * @version 0.3
  * @brief Treasure Hunt
  *    This program was made to uncode a password that has to be discovered by
  * putting together multiples hints that were hide around our college building
@@ -87,11 +87,8 @@ void Rijndael::subBytes() {
 }
 
 void Rijndael::shiftRows() {
-  std::cout << this->_text_matrix;
-  for (int offset = 0; offset < 4; ++offset) {
+  for (int offset = 0; offset < 4; ++offset)
     this->_text_matrix[offset] = shiftVector<uint32_t>(this->_text_matrix[offset], offset);
-  }
-  std::cout << this->_text_matrix;
 }
 
 void Rijndael::encrypt() {
@@ -111,7 +108,15 @@ void Rijndael::invSubBytes() {
   }
 }
 
+void Rijndael::invShiftRows() {
+  std::cout << this->_text_matrix;
+  for (int offset = 0; offset < 4; ++offset)
+    this->_text_matrix[offset] = unshiftVector<uint32_t>(this->_text_matrix[offset], offset);
+  std::cout << this->_text_matrix;
+}
+
 void Rijndael::decrypt() {
+  invShiftRows();
   invSubBytes();
   addRoundKey();
 }

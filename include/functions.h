@@ -3,7 +3,7 @@
  * @date November 7, 2022
  *
  * @file functions.h
- * @version 0.2
+ * @version 0.3
  * @brief Treasure Hunt
  *    This program was made to uncode a password that has to be discovered by
  * putting together multiples hints that were hide around our college building
@@ -85,7 +85,7 @@ int getIndex(std::vector<T> vector, T element) {
 template <class T>
 std::vector<T> shiftVector(const std::vector<T> &vector, const int offset) {
   std::vector<T> shifted_vector;
-  // Startinng in the offset position
+  // Starting at the offset position
   for (size_t i = offset; i < vector.size(); ++i) shifted_vector.push_back(vector[i]);
   // Adding the rest
   for (int i = 0; i < offset; ++i) shifted_vector.push_back(vector[i]);
@@ -93,5 +93,23 @@ std::vector<T> shiftVector(const std::vector<T> &vector, const int offset) {
   return shifted_vector;
 }
 
+/**
+ * @brief Shift from the end a vector "offset" times
+ *
+ * @tparam T The data type of the vector
+ * @param vector Array to ushift
+ * @param offset The amount of times the vector will be permutated
+ * @return The vector unshifted
+ */
+template <class T>
+std::vector<T> unshiftVector(const std::vector<T> &vector, const int offset) {
+  std::vector<T> unshifted_vector;
+  // Starting at the offset position (from the end)
+  for (size_t i = vector.size() - offset; i < vector.size(); ++i) unshifted_vector.push_back(vector[i]);
+  // Adding the rest
+  for (size_t i = 0; i < vector.size() - offset; ++i) unshifted_vector.push_back(vector[i]);
+
+  return unshifted_vector;
+}
 
 #endif // _FUNTIONS_H_

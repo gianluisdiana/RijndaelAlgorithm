@@ -3,7 +3,7 @@
  * @date November 7, 2022
  *
  * @file rijndael.h
- * @version 0.2
+ * @version 0.3
  * @brief Treasure Hunt
  *    This program was made to uncode a password that has to be discovered by
  * putting together multiples hints that were hide around our college building
@@ -76,6 +76,12 @@ private:
    * @brief Revert the sustitution made with the box.
    */
   void invSubBytes();
+
+  /**
+   * @brief Revert the permutation made.
+   * Rotate, from the end, each row depending on its position
+   */
+  void invShiftRows();
 
   static const uint32_t s_box[16][16];          // Box to substitute values with
   static const uint32_t inverse_s_box[16][16];  // Box to reverse the substitute done
