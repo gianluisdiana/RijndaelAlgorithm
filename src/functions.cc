@@ -23,11 +23,14 @@
 
 void usage() {
   std::cout << "Introduce the key when executing the code:\n"
-            << "./exec.out <key>\n";
+            << "./exec.out <--encrypt | --decrypt> <key>\n";
 }
 
-void checkInput(int argc) {
-  if (argc == 2) return;
+void checkInput(int argc, char* argv[]) {
+  if (argc == 3) {
+    std::string option = argv[1];
+    if (option == "--decrypt" || option == "--encrypt") return;
+  }
   usage();
   exit(1);
 }

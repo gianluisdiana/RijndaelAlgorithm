@@ -23,15 +23,18 @@
 #include "../include/rijndael.h"
 
 int main(int argc, char* argv[]) {
-  checkInput(argc);
+  checkInput(argc, argv);
 
-  Rijndael rijndael(argv[1]);
-  rijndael.encrypt();
+  Rijndael rijndael(argv[2]);
+  std::string option = argv[1];
 
-  std::cout << "Text encrypted: " << rijndael.text() << "\n";
-
-  rijndael.decrypt();
-  std::cout << "Text decrypted: " << rijndael.text() << "\n";
+  if (option == "--encrypt") {
+    rijndael.encrypt();
+    std::cout << "Text encrypted: " << rijndael.text() << "\n";
+  } else if (option == "--decrypt") {
+    rijndael.decrypt();
+    std::cout << "Text decrypted: " << rijndael.text() << "\n";
+  }
 
   return 0;
 }

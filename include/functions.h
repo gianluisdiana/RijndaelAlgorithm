@@ -36,8 +36,9 @@ void usage();
  * @brief Check if the program was called as expected
  *
  * @param argc The amount of parameters introduced with the program
+ * @param argv A list with the parameters
  */
-void checkInput(int argc);
+void checkInput(int argc, char* argv[]);
 
 /**
  * @brief Complete the string with a padding character
