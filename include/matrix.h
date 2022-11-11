@@ -17,12 +17,12 @@
  * @copyright Copyright (c) 2022
  *
  */
+#ifndef _MATRIX_H_
+#define _MATRIX_H_
+
 #include <iostream>
 
 #include "functions.h"
-
-#ifndef _MATRIX_H_
-#define _MATRIX_H_
 
 /**
  * @class Matrix

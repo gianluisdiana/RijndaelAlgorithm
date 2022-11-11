@@ -17,10 +17,10 @@
  * @copyright Copyright (c) 2022
  *
  */
-#include "matrix.h"
-
 #ifndef _RIJNDAEL_H_
 #define _RIJNDAEL_H_
+
+#include "matrix.h"
 
 /**
  * @class Rijndael

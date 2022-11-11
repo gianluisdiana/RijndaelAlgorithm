@@ -17,15 +17,15 @@
  * @copyright Copyright (c) 2022
  *
  */
-#include <algorithm>
-#include <string>
-#include <vector>
-
 template <class T>
 class Matrix;
 
 #ifndef _FUNTIONS_H_
 #define _FUNTIONS_H_
+
+#include <algorithm>
+#include <string>
+#include <vector>
 
 /**
  * @brief Tell the user how to use the program
