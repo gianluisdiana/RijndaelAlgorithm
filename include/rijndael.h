@@ -101,6 +101,8 @@ private:
 
   static const uint32_t s_box[16][16];          // Box to substitute values with
   static const uint32_t inverse_s_box[16][16];  // Box to reverse the substitute done
+  static const uint32_t const_polynomial[4][4]; // Matrix to multiply columns with
+  static const uint32_t inv_const_polynomial[4][4]; // Matrix to reverse the mixComlumn
   static std::string _encryption_key;           // Key used to encrypt the text
   Matrix<uint32_t> _text_matrix;                // A matrix with the text to encrypt
   Matrix<uint32_t> _encryption_matrix;          // A matrix with the private key encrypted
