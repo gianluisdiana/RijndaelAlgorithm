@@ -65,12 +65,12 @@ private:
    */
   void subBytes();
 
-  // ----- DECRYPT -----
   /**
-   * @brief Performs an element-by-element xor operation with the encryption
-   * matrix.
+   * @brief Permutate the rows of the matrix.
    */
-  void invAddRoundKey();
+  void shiftRows();
+
+  // ----- DECRYPT -----
 
   /**
    * @brief Revert the sustitution made with the box.

@@ -86,16 +86,21 @@ void Rijndael::subBytes() {
   }
 }
 
+void Rijndael::shiftRows() {
+  std::cout << this->_text_matrix;
+  for (int offset = 0; offset < 4; ++offset) {
+    this->_text_matrix[offset] = shiftVector<uint32_t>(this->_text_matrix[offset], offset);
+  }
+  std::cout << this->_text_matrix;
+}
+
 void Rijndael::encrypt() {
   this->addRoundKey();
   this->subBytes();
+  this->shiftRows();
 }
 
 // ------------------ DECRYPT ------------------
-
-void Rijndael::invAddRoundKey() {
-  this->_text_matrix = this->_text_matrix ^ this->_encryption_matrix;
-}
 
 void Rijndael::invSubBytes() {
   for (size_t i = 0; i < 4; ++i) {
