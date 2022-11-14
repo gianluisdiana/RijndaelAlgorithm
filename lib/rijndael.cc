@@ -67,10 +67,10 @@ const uint32_t Rijndael::const_polynomial[4][4] = {
 };
 
 const uint32_t Rijndael::inv_const_polynomial[4][4] = {
-  {0XE, 0XB, 0XD, 0X9},
-  {0X9, 0XE, 0XB, 0XD},
-  {0XD, 0X9, 0XE, 0XB},
-  {0XB, 0XD, 0X9, 0XE}
+  {0xE, 0xB, 0xD, 0x9},
+  {0x9, 0xE, 0xB, 0xD},
+  {0xD, 0x9, 0xE, 0xB},
+  {0xB, 0xD, 0x9, 0xE}
 };
 
 std::string Rijndael::_encryption_key = "ULL_C0ngR350-1nF";
