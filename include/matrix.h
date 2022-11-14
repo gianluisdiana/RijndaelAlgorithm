@@ -104,11 +104,11 @@ public:
   std::string toString();
 
 /**
- * @brief Get the amount of rows.
+ * @brief Makes a string with the hex value of each element contained in the matrix
  *
- * @return The amount of rows the matrix has.
+ * @return A string with the equivalent hexadecimal value of each element
  */
-  size_t amountRows();
+  std::string toHexString();
 
 private:
   size_t _amount_rows; // The amount of rows the matrix has
@@ -147,11 +147,6 @@ Matrix<T>::Matrix (T (&matrix)[amount_rows][amount_cols]) {
     this->_matrix.push_back(std::vector<T>());
     this->_matrix[i].assign(matrix[i], matrix[i] + this->_amount_cols);
   }
-}
-
-template <class T>
-size_t Matrix<T>::amountRows() {
-  return this->_amount_rows;
 }
 
 template <class C>
@@ -210,6 +205,18 @@ std::string Matrix<T>::toString() {
     }
   }
   return matrix_string;
+}
+
+template <class T>
+std::string Matrix<T>::toHexString() {
+  std::string matrix_hex_string = "";
+
+ for (auto& row : this->_matrix) {
+    for (size_t i = 0; i < row.size(); ++i) {
+      matrix_hex_string += decToHex(row[i]);
+    }
+  }
+  return matrix_hex_string;
 }
 
 #endif // _MATRIX_H_
