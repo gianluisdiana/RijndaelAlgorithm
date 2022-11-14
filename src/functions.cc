@@ -22,14 +22,34 @@
 #include <iostream>
 
 void usage() {
-  std::cout << "./exec.out [--hex] <--encrypt | --decrypt> <key>\n";
+  std::cout << "./bin/exec.out [--hex] <--encrypt | --decrypt> <key>\n";
+}
+
+void help() {
+  std::cout << "This program encrypt or decrypt a key using the Rijndael algorithm "
+            << "and a private key.\n";
+  usage();
+  std::cout << "\t\t  │\t\t  │\t\t └─> The key to encrypt / decrypt\n"
+            << "\t\t  │\t\t  └─> The mode selected\n"
+            << "\t\t  └─> If we want to display the result hex code. Optional.\n";
 }
 
 void checkInput(const int argc, char* argv[]) {
   std::vector<std::string> input;
   input.assign(argv, argv + argc);
 
+  if (argc == 2) {
+    if (input[1] == "--help") {
+      help();
+      exit(0);
+    }
+    std::cerr << "Use --help for more info\n";
+    usage();
+    exit(1);
+  }
+
   if (argc != 3 && argc != 4) {
+    std::cerr << "Use --help for more info\n";
     usage();
     exit(1);
   }

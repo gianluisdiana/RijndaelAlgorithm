@@ -30,6 +30,11 @@
 void usage();
 
 /**
+ * @brief Provides help to the user to execute the program properly
+ */
+void help();
+
+/**
  * @brief Check if the program was called as expected
  *
  * @param argc The amount of parameters introduced with the program
