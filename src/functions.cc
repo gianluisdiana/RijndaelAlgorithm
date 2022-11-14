@@ -22,17 +22,63 @@
 #include <iostream>
 
 void usage() {
-  std::cout << "Introduce the key when executing the code:\n"
-            << "./exec.out <--encrypt | --decrypt> <key>\n";
+  std::cout << "./exec.out [--hex] <--encrypt | --decrypt> <key>\n";
 }
 
-void checkInput(int argc, char* argv[]) {
-  if (argc == 3) {
-    std::string option = argv[1];
-    if (option == "--decrypt" || option == "--encrypt") return;
+void checkInput(const int argc, char* argv[]) {
+  std::vector<std::string> input;
+  input.assign(argv, argv + argc);
+
+  if (argc != 3 && argc != 4) {
+    usage();
+    exit(1);
   }
-  usage();
-  exit(1);
+
+  if (argc == 4 && getIndex<std::string>(input, "--hex") == -1) {
+    std::cerr << "If you use 4 parameteres, one of them must be '--hex'\n";
+    usage();
+    exit(1);
+  }
+
+  int decrypt_index = getIndex<std::string>(input, "--decrypt");
+  int encrypt_index = getIndex<std::string>(input, "--encrypt");
+
+  if (encrypt_index == -1 && decrypt_index == -1) {
+    std::cerr << "You need to select one mode <encrypt | decrypt>\n";
+    usage();
+    exit(1);
+  }
+
+  if (encrypt_index != -1 && decrypt_index != -1) {
+    std::cerr << "You must select just one mode\n";
+    usage();
+    exit(1);
+  }
+
+  size_t mode_index = encrypt_index != -1 ? encrypt_index : decrypt_index;
+
+  if (mode_index == input.size() - 1) {
+    std::cerr << "You must introduced first the mode <encrypt | decrypt> and then the word\n";
+    usage();
+    exit(1);
+  }
+
+  if (input[mode_index + 1] == "--hex") {
+    std::cerr << "After the mode must be the key to work with\n";
+    usage();
+    exit(1);
+  }
+
+  std::cout << "The mode selected is: " << (encrypt_index != -1 ? "encrypt\n" : "decrypt\n");
+}
+
+int getModeIndex(const int argc, char* argv[]) {
+  std::vector<std::string> input;
+  input.assign(argv, argv + argc);
+  int decrypt_index = getIndex<std::string>(input, "--decrypt");
+  int encrypt_index = getIndex<std::string>(input, "--encrypt");
+
+  return encrypt_index != -1 ? encrypt_index : decrypt_index;
 }
 
 std::string formatText(std::string text, const size_t size, const char padding_char) {

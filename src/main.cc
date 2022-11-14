@@ -25,8 +25,10 @@
 int main(int argc, char* argv[]) {
   checkInput(argc, argv);
 
-  Rijndael rijndael(argv[2]);
-  std::string option = argv[1];
+  // bool show_hex = argc == 4;
+  int mode_index = getModeIndex(argc, argv);
+  std::string option = argv[mode_index];
+  Rijndael rijndael(argv[mode_index + 1]);
 
   if (option == "--encrypt") {
     rijndael.encrypt();
@@ -35,6 +37,8 @@ int main(int argc, char* argv[]) {
     rijndael.decrypt();
     std::cout << "Text decrypted: " << rijndael.text() << "\n";
   }
+
+  // if (show_hex) std::cout << "Hex code: " << rijndael.textToHex() << "\n";
 
   return 0;
 }

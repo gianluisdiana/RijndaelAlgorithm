@@ -38,7 +38,16 @@ void usage();
  * @param argc The amount of parameters introduced with the program
  * @param argv A list with the parameters
  */
-void checkInput(int argc, char* argv[]);
+void checkInput(const int argc, char* argv[]);
+
+/**
+ * @brief Get the index of the mode selected in the input array
+ *
+ * @param argc The amount of parameters introduced with the program
+ * @param argv A list with the parameters
+ * @return The index of the mode selected
+ */
+int getModeIndex(const int argc, char* argv[]);
 
 /**
  * @brief Complete the string with a padding character
@@ -48,7 +57,6 @@ void checkInput(int argc, char* argv[]);
  * @param padding_char The character to add to the string
  */
 std::string formatText(std::string text, const size_t size, const char padding_char = ' ');
-
 
 /**
  * @brief Loop the string from the end to the beginnig, setting the reversed string
