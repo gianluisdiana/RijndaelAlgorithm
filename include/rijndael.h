@@ -52,6 +52,13 @@ public:
    */
   std::string text();
 
+  /**
+   * @brief Convert the text matrix in a string with its hex value
+   *
+   * @return A string with the hex code of each character
+   */
+  std::string toHex();
+
 private:
   // ----- ENCRYPT -----
   /**

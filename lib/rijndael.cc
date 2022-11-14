@@ -85,6 +85,10 @@ std::string Rijndael::text() {
   return this->_text_matrix.transpose().toString();
 }
 
+std::string Rijndael::toHex() {
+  return this->_text_matrix.transpose().toHexString();
+}
+
 // ------------------ ENCRYPT ------------------
 
 void Rijndael::addRoundKey() {

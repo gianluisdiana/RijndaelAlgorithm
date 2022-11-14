@@ -25,7 +25,7 @@
 int main(int argc, char* argv[]) {
   checkInput(argc, argv);
 
-  // bool show_hex = argc == 4;
+  bool show_hex = argc == 4;
   int mode_index = getModeIndex(argc, argv);
   std::string option = argv[mode_index];
   Rijndael rijndael(argv[mode_index + 1]);
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Text decrypted: " << rijndael.text() << "\n";
   }
 
-  // if (show_hex) std::cout << "Hex code: " << rijndael.textToHex() << "\n";
+  if (show_hex) std::cout << "Hex code: " << rijndael.toHex() << "\n";
 
   return 0;
 }
