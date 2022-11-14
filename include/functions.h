@@ -17,9 +17,6 @@
  * @copyright Copyright (c) 2022
  *
  */
-template <class T>
-class Matrix;
-
 #ifndef _FUNTIONS_H_
 #define _FUNTIONS_H_
 
@@ -65,6 +62,14 @@ std::string formatText(std::string text, const size_t size, const char padding_c
  * @return The reversed string
  */
 std::string reverseString(const std::string str);
+
+/**
+ * @brief Convert a decimal to hexadecimal.
+ *
+ * @param number The decimal to convert.
+ * @return Its equivalent in hexadecimal base.
+ */
+std::string decToHex(const int number);
 
 /**
  * @brief Get the the index of an element.

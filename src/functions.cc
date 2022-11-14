@@ -92,3 +92,17 @@ std::string reverseString(const std::string str) {
     reversed_string += str[i];
   return reversed_string;
 }
+
+std::string decToHex(const int number) {
+  const char EQUIVALENT[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+  int result = number;
+  std::string inverted_hex = "";
+
+  while (result > 15) {
+    inverted_hex += EQUIVALENT[result % 16];
+    result = result / 16;
+  }
+
+  if (result != 0) inverted_hex += EQUIVALENT[result];
+  return reverseString(inverted_hex);
+}
