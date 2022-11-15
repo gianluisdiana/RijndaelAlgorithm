@@ -143,16 +143,16 @@ void Rijndael::invShiftRows() {
 
 void Rijndael::invRound(const int current_round) {
   this->addRoundKey();
+  // this->invMixColumns();
   this->invShiftRows();
   this->invSubBytes();
-  // this->invMixColumns();
   if (current_round != 1) this->invRound(current_round - 1);
 }
 
 void Rijndael::decrypt() {
-  addRoundKey();
-  invShiftRows();
-  invSubBytes();
+  this->addRoundKey();
+  this->invShiftRows();
+  this->invSubBytes();
   this->invRound();
-  addRoundKey();
+  this->addRoundKey();
 }
