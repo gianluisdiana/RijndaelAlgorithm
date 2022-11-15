@@ -18,7 +18,7 @@ CXX          := g++
 CXX_FLAGS    := -O0 -Wall -Wextra -std=c++17 -ggdb
 
 # Define object files
-OBJ := build/main.o build/functions.o build/rijndael.o
+OBJ := build/main.o build/functions.o build/rijndael.o build/input_error.o
 
 # Compile the main and the auxiliary functions
 build/%.o: lib/%.cc

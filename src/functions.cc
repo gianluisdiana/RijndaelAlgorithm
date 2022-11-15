@@ -21,6 +21,8 @@
 
 #include <iostream>
 
+#include "../include/input_error.h"
+
 void usage() {
   std::cout << "./bin/exec.out [--hex] <--encrypt | --decrypt> <key>\n";
 }
@@ -38,58 +40,41 @@ void checkInput(const int argc, char* argv[]) {
   std::vector<std::string> input;
   input.assign(argv, argv + argc);
 
-  if (argc == 2) {
-    if (input[1] == "--help") {
-      help();
-      exit(0);
+  try {
+    if (argc == 2) {
+      if (input[1] == "--help") {
+        help();
+        exit(0);
+      }
+      throw InputError("Use --help for more info\n");
     }
-    std::cerr << "Use --help for more info\n";
+
+    if (argc != 3 && argc != 4) throw InputError("Use --help for more info\n");
+
+    if (argc == 4 && getIndex<std::string>(input, "--hex") == -1)
+      throw InputError("If you use 4 parameteres, one of them must be '--hex'\n");
+
+    int decrypt_index = getIndex<std::string>(input, "--decrypt");
+    int encrypt_index = getIndex<std::string>(input, "--encrypt");
+
+    if (encrypt_index == -1 && decrypt_index == -1)
+      throw InputError("You need to select one mode <encrypt | decrypt>\n");
+
+    if (encrypt_index != -1 && decrypt_index != -1)
+      throw InputError("You must select just one mode\n");
+
+    size_t mode_index = encrypt_index != -1 ? encrypt_index : decrypt_index;
+
+    if (mode_index == input.size() - 1)
+      throw InputError("You must introduced first the mode <encrypt | decrypt> and then the word\n");
+
+    if (input[mode_index + 1] == "--hex")
+      throw InputError("After the mode must be the key to work with\n");
+  } catch (const InputError& e) {
+    std::cout << e.getMessage();
     usage();
     exit(1);
   }
-
-  if (argc != 3 && argc != 4) {
-    std::cerr << "Use --help for more info\n";
-    usage();
-    exit(1);
-  }
-
-  if (argc == 4 && getIndex<std::string>(input, "--hex") == -1) {
-    std::cerr << "If you use 4 parameteres, one of them must be '--hex'\n";
-    usage();
-    exit(1);
-  }
-
-  int decrypt_index = getIndex<std::string>(input, "--decrypt");
-  int encrypt_index = getIndex<std::string>(input, "--encrypt");
-
-  if (encrypt_index == -1 && decrypt_index == -1) {
-    std::cerr << "You need to select one mode <encrypt | decrypt>\n";
-    usage();
-    exit(1);
-  }
-
-  if (encrypt_index != -1 && decrypt_index != -1) {
-    std::cerr << "You must select just one mode\n";
-    usage();
-    exit(1);
-  }
-
-  size_t mode_index = encrypt_index != -1 ? encrypt_index : decrypt_index;
-
-  if (mode_index == input.size() - 1) {
-    std::cerr << "You must introduced first the mode <encrypt | decrypt> and then the word\n";
-    usage();
-    exit(1);
-  }
-
-  if (input[mode_index + 1] == "--hex") {
-    std::cerr << "After the mode must be the key to work with\n";
-    usage();
-    exit(1);
-  }
-
-  std::cout << "The mode selected is: " << (encrypt_index != -1 ? "encrypt\n" : "decrypt\n");
 }
 
 int getModeIndex(const int argc, char* argv[]) {
