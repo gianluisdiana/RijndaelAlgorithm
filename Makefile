@@ -12,31 +12,41 @@
 # 'make setup'  creates the necesary folders
 #
 
-# Define the Cpp compiler to use
-CXX          := g++
-# Define any compile-time flags
-CXX_FLAGS    := -O0 -Wall -Wextra -std=c++17 -ggdb
+# Cpp compiler to use
+CXX := g++
+# Compile-time flags
+CXXFLAGS := -O3 -Wall -Wextra -Wshadow -std=c++2b -ggdb
+
+# Executable name
+EXEC := exec.out
 
 # Define object files
-OBJ := build/main.o build/functions.o build/rijndael.o build/input_error.o
+OBJS := build/main.o build/functions.o build/rijndael.o build/input_error.o
 
-# Compile the main and the auxiliary functions
-build/%.o: lib/%.cc
-	$(CXX) $(CXX_FLAGS) -c $< -o $@
-
-# Compile the classes implementation
-build/%.o: src/%.cc
-	$(CXX) $(CXX_FLAGS) -c $< -o $@
+# Default target
+all: setup $(EXEC)
 
 # Create the executable from the compiled objects
-exec.out: $(OBJ)
-	$(CXX) $(CXX_FLAGS) $(OBJ) -o bin/exec.out
+$(EXEC): $(OBJS)
+	$(CXX) $(CXXFLAGS) $^ -o bin/$@
+
+# Compile the classes implementation
+build/%.o: lib/%.cc include/%.h
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Compile the main and the auxiliary functions
+build/%.o: src/%.cc include/functions.h include/matrix.h
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# PHONY targets (not associated with file creation)
+.PHONY: clean setup
 
 # Delete the compiled object and the excutable
 clean:
-	clear
-	rm ./build/*.o ./bin/exec.out
+	@for file in $(OBJS); do if [ -f "$$file" ]; then rm $$file; fi; done
+	@if [ -f "./bin/$(EXEC)" ]; then rm ./bin/$(EXEC); fi
 
 # Create the necesary folders to build the code
 setup:
-	mkdir bin build
+	@if [ ! -d "./bin" ]; then mkdir bin; fi
+	@if [ ! -d "./build" ]; then mkdir build; fi
