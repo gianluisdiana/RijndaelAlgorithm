@@ -17,9 +17,11 @@
  * @copyright Copyright (c) 2022
  *
  */
+
 #include "../include/functions.h"
 
 #include <iostream>
+#include <sstream>
 
 #include "../include/input_error.h"
 
@@ -80,34 +82,24 @@ void checkInput(const int argc, char* argv[]) {
 int getModeIndex(const int argc, char* argv[]) {
   std::vector<std::string> input;
   input.assign(argv, argv + argc);
-  int decrypt_index = getIndex<std::string>(input, "--decrypt");
-  int encrypt_index = getIndex<std::string>(input, "--encrypt");
+  const int decrypt_index = getIndex<std::string>(input, "--decrypt");
+  const int encrypt_index = getIndex<std::string>(input, "--encrypt");
 
   return encrypt_index != -1 ? encrypt_index : decrypt_index;
 }
 
 std::string formatText(std::string text, const size_t size, const char padding_char) {
-  while (text.size() < size) text += padding_char;
-  return text;
+  if (text.size() > size) return text.substr(0, size);
+  return text + std::string(size - text.size(), padding_char);
 }
 
-std::string reverseString(const std::string str) {
-  std::string reversed_string = "";
-  for (int i = str.length() - 1; i >= 0; --i)
-    reversed_string += str[i];
-  return reversed_string;
+std::string reverseString(std::string str) {
+  std::reverse(str.begin(), str.end());
+  return str;
 }
 
 std::string decToHex(const int number) {
-  const char EQUIVALENT[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-  int result = number;
-  std::string inverted_hex = "";
-
-  while (result > 15) {
-    inverted_hex += EQUIVALENT[result % 16];
-    result = result / 16;
-  }
-
-  if (result != 0) inverted_hex += EQUIVALENT[result];
-  return reverseString(inverted_hex);
+  std::stringstream stream;
+  stream << std::hex << number;
+  return stream.str();
 }

@@ -17,8 +17,8 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef _FUNTIONS_H_
-#define _FUNTIONS_H_
+#ifndef _FUNCTIONS_H_
+#define _FUNCTIONS_H_
 
 #include <algorithm>
 #include <string>
@@ -66,7 +66,7 @@ std::string formatText(std::string text, const size_t size, const char padding_c
  * @param str The string to reverse
  * @return The reversed string
  */
-std::string reverseString(const std::string str);
+std::string reverseString(std::string str);
 
 /**
  * @brief Convert a decimal to hexadecimal.
@@ -121,13 +121,14 @@ std::vector<T> shiftVector(const std::vector<T> &vector, const int offset) {
  */
 template <class T>
 std::vector<T> unshiftVector(const std::vector<T> &vector, const int offset) {
-  std::vector<T> unshifted_vector;
-  // Starting at the offset position (from the end)
-  for (size_t i = vector.size() - offset; i < vector.size(); ++i) unshifted_vector.push_back(vector[i]);
-  // Adding the rest
-  for (size_t i = 0; i < vector.size() - offset; ++i) unshifted_vector.push_back(vector[i]);
+  // std::vector<T> unshifted_vector;
+  // // Starting at the offset position (from the end)
+  // for (size_t i = vector.size() - offset; i < vector.size(); ++i) unshifted_vector.push_back(vector[i]);
+  // // Adding the rest
+  // for (size_t i = 0; i < vector.size() - offset; ++i) unshifted_vector.push_back(vector[i]);
 
-  return unshifted_vector;
+  // return unshifted_vector;
+  return shiftVector(vector, vector.size() - offset);
 }
 
-#endif // _FUNTIONS_H_
+#endif // _FUNCTIONS_H_
