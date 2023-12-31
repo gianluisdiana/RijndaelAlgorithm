@@ -31,11 +31,11 @@ $(EXEC): $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o bin/$@
 
 # Compile the classes implementation
-build/%.o: lib/%.cc include/%.h
+build/%.o: lib/%.cpp include/%.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Compile the main and the auxiliary functions
-build/%.o: src/%.cc include/functions.h include/matrix.h
+build/%.o: src/%.cpp include/functions.hpp include/matrix.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # PHONY targets (not associated with file creation)

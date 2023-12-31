@@ -19,8 +19,8 @@
  */
 #include <iostream>
 
-#include "../include/functions.h"
-#include "../include/rijndael.h"
+#include "../include/functions.hpp"
+#include "../include/rijndael.hpp"
 
 int main(int argc, char* argv[]) {
   checkInput(argc, argv);

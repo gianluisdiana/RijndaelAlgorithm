@@ -2,7 +2,7 @@
  * @author Gian Luis Bolivar Diana (gianluisbolivar1@gmail.com)
  * @date November 15, 2022
  *
- * @file input_error.h
+ * @file input_error.hpp
  * @version 0.3.2
  * @brief Treasure Hunt
  *    This program was made to uncode a password that has to be discovered by
@@ -17,8 +17,8 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef _INPUT_ERROR_H_
-#define _INPUT_ERROR_H_
+#ifndef _INPUT_ERROR_HPP_
+#define _INPUT_ERROR_HPP_
 
 #include <exception>
 #include <string>
@@ -47,4 +47,4 @@ private:
   std::string _message;
 };
 
-#endif // _INPUT_ERROR_H_
+#endif // _INPUT_ERROR_HPP_

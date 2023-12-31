@@ -2,7 +2,7 @@
  * @author Gian Luis Bolivar Diana (gianluisbolivar1@gmail.com)
  * @date November 7, 2022
  *
- * @file rijndael.h
+ * @file rijndael.hpp
  * @version 0.4
  * @brief Treasure Hunt
  *    This program was made to uncode a password that has to be discovered by
@@ -17,10 +17,10 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef _RIJNDAEL_H_
-#define _RIJNDAEL_H_
+#ifndef _RIJNDAEL_HPP_
+#define _RIJNDAEL_HPP_
 
-#include "matrix.h"
+#include "matrix.hpp"
 
 /**
  * @class Rijndael
@@ -115,4 +115,4 @@ private:
   Matrix<uint32_t> _encryption_matrix;          // A matrix with the private key encrypted
 };
 
-#endif // _RIJNDAEL_H_
+#endif // _RIJNDAEL_HPP_

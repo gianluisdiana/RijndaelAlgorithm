@@ -2,7 +2,7 @@
  * @author Gian Luis Bolivar Diana (gianluisbolivar1@gmail.com)
  * @date November 7, 2022
  *
- * @file functions.h
+ * @file functions.hpp
  * @version 0.3
  * @brief Treasure Hunt
  *    This program was made to uncode a password that has to be discovered by
@@ -17,8 +17,8 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef _FUNCTIONS_H_
-#define _FUNCTIONS_H_
+#ifndef _FUNCTIONS_HPP_
+#define _FUNCTIONS_HPP_
 
 #include <algorithm>
 #include <string>
@@ -131,4 +131,4 @@ std::vector<T> unshiftVector(const std::vector<T> &vector, const int offset) {
   return shiftVector(vector, vector.size() - offset);
 }
 
-#endif // _FUNCTIONS_H_
+#endif // _FUNCTIONS_HPP_

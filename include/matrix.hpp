@@ -2,7 +2,7 @@
  * @author Gian Luis Bolivar Diana (gianluisbolivar1@gmail.com)
  * @date November 7, 2022
  *
- * @file matrix.h
+ * @file matrix.hpp
  * @version 0.2
  * @brief Treasure Hunt
  *    This program was made to uncode a password that has to be discovered by
@@ -18,12 +18,12 @@
  *
  */
 
-#ifndef _MATRIX_H_
-#define _MATRIX_H_
+#ifndef _MATRIX_HPP_
+#define _MATRIX_HPP_
 
 #include <iostream>
 
-#include "functions.h"
+#include "functions.hpp"
 
 /**
  * @brief Represents a bidemensional array
@@ -221,4 +221,4 @@ std::ostream& operator<<(std::ostream& os, const Matrix<C>& matrix) {
   return os;
 }
 
-#endif // _MATRIX_H_
+#endif // _MATRIX_HPP_

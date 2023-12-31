@@ -18,12 +18,12 @@
  *
  */
 
-#include "../include/functions.h"
+#include "../include/functions.hpp"
 
 #include <iostream>
 #include <sstream>
 
-#include "../include/input_error.h"
+#include "../include/input_error.hpp"
 
 void usage() {
   std::cout << "./bin/exec.out [--hex] <--encrypt | --decrypt> <key>\n";

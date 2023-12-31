@@ -17,7 +17,7 @@
  * @copyright Copyright (c) 2022
  *
  */
-#include "../include/input_error.h"
+#include "../include/input_error.hpp"
 
 std::string InputError::getMessage() const{
   return this->_message;
