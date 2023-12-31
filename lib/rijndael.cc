@@ -76,83 +76,83 @@ const uint32_t Rijndael::inv_const_polynomial[4][4] = {
 std::string Rijndael::_encryption_key = "ULL_C0ngR350-1nF";
 
 Rijndael::Rijndael(std::string text) {
-  text = text.size() == 16 ? text : formatText(text, 16);
-  this->_text_matrix = Matrix<uint32_t>(text, 4, 4).transpose();
-  this->_encryption_matrix = Matrix<uint32_t>(_encryption_key, 4, 4).transpose();
+  text = text.size() == 64 ? text : formatText(text, 64);
+  _text_matrix = Matrix<uint32_t>(text, 8, 8).transpose();
+  _encryption_matrix = Matrix<uint32_t>(_encryption_key, 8, 8).transpose();
 }
 
 std::string Rijndael::text() {
-  return this->_text_matrix.transpose().toString();
+  return _text_matrix.transpose().toString();
 }
 
 std::string Rijndael::toHex() {
-  return this->_text_matrix.transpose().toHexString();
+  return _text_matrix.transpose().toHexString();
 }
 
 // ------------------ ENCRYPT ------------------
 
 void Rijndael::addRoundKey() {
-  this->_text_matrix = this->_text_matrix ^ this->_encryption_matrix;
+  _text_matrix = _text_matrix ^ _encryption_matrix;
 }
 
 void Rijndael::subBytes() {
-  for (size_t i = 0; i < 4; ++i) {
-    for (size_t j = 0; j < 4; ++j) {
-      uint32_t element = this->_text_matrix[i][j];
-      this->_text_matrix[i][j] = Rijndael::s_box[element / 16][element % 16];
+  for (size_t i = 0; i < 8; ++i) {
+    for (size_t j = 0; j < 8; ++j) {
+      uint32_t element = _text_matrix[i][j];
+      _text_matrix[i][j] = Rijndael::s_box[element / 16][element % 16];
     }
   }
 }
 
 void Rijndael::shiftRows() {
-  for (int offset = 0; offset < 4; ++offset)
-    this->_text_matrix[offset] = shiftVector<uint32_t>(this->_text_matrix[offset], offset);
+  for (int offset = 0; offset < 8; ++offset)
+    _text_matrix[offset] = shiftVector(_text_matrix[offset], offset);
 }
 
 void Rijndael::round(const int current_round) {
-  this->subBytes();
-  this->shiftRows();
-  // this->mixColumns();
-  this->addRoundKey();
-  if (current_round != 9) this->round(current_round + 1);
+  subBytes();
+  shiftRows();
+  // mixColumns();
+  addRoundKey();
+  if (current_round != 9) round(current_round + 1);
 }
 
 void Rijndael::encrypt() {
-  this->addRoundKey();
-  this->round();
-  this->subBytes();
-  this->shiftRows();
-  this->addRoundKey();
+  addRoundKey();
+  round();
+  subBytes();
+  shiftRows();
+  addRoundKey();
 }
 
 // ------------------ DECRYPT ------------------
 
 void Rijndael::invSubBytes() {
-  for (size_t i = 0; i < 4; ++i) {
-    for (size_t j = 0; j < 4; ++j) {
-      uint32_t element = this->_text_matrix[i][j];
-      this->_text_matrix[i][j] = Rijndael::inverse_s_box[element / 16][element % 16];
+  for (size_t i = 0; i < 8; ++i) {
+    for (size_t j = 0; j < 8; ++j) {
+      uint32_t element = _text_matrix[i][j];
+      _text_matrix[i][j] = Rijndael::inverse_s_box[element / 16][element % 16];
     }
   }
 }
 
 void Rijndael::invShiftRows() {
-  for (int offset = 0; offset < 4; ++offset)
-    this->_text_matrix[offset] = unshiftVector<uint32_t>(this->_text_matrix[offset], offset);
+  for (int offset = 0; offset < 8; ++offset)
+    _text_matrix[offset] = unshiftVector(_text_matrix[offset], offset);
 }
 
 void Rijndael::invRound(const int current_round) {
-  this->addRoundKey();
-  // this->invMixColumns();
-  this->invShiftRows();
-  this->invSubBytes();
-  if (current_round != 1) this->invRound(current_round - 1);
+  addRoundKey();
+  // invMixColumns();
+  invShiftRows();
+  invSubBytes();
+  if (current_round != 1) invRound(current_round - 1);
 }
 
 void Rijndael::decrypt() {
-  this->addRoundKey();
-  this->invShiftRows();
-  this->invSubBytes();
-  this->invRound();
-  this->addRoundKey();
+  addRoundKey();
+  invShiftRows();
+  invSubBytes();
+  invRound();
+  addRoundKey();
 }
